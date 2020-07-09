@@ -7,14 +7,16 @@
 var numbersCPU = [];
 var min = 1;
 var max = 100;
-// variabile superglobale elements
+// variabile superglobale elements visibile anche all'interno delle funzioni
 elements = 5;
 
 numbersCPU = randomArray(elements, min, max);
 console.log(numbersCPU);
 
 // espongo i 5 numeri generati tramite un alert
-alert("Memorizza questi numeri: " + numbersCPU);
+for (var i = 0; i < numbersCPU.length; i++) {
+  alert("Memorizza il " + (i+1) +" numero: " + numbersCPU[i]);
+}
 
 // messaggio di attesa
 $('h1').addClass('active').html('Attendi 30 secondi...');
