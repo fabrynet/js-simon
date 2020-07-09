@@ -16,8 +16,21 @@ console.log(numbersCPU);
 // espongo i 5 numeri generati tramite un alert
 alert("Memorizza questi numeri: " + numbersCPU);
 
+// messaggio di attesa
+$('h1').addClass('active').html('Attendi 30 secondi...');
+
 // faccio partire il gioco dopo di 30 secondi
-setTimeout(startGame(numbersCPU), 30000);
+setTimeout(function(){
+
+  // tolgo messaggio di attesa
+  $('h1').removeClass('active');
+
+  startGame(numbersCPU);
+
+  // messaggio fine gioco
+  $('h1').addClass('active').html('Fine del gioco!');
+
+}, 30000);
 
 // --------------------------- FUNCTIONS procedurali --------------------------- //
 function startGame(numbersCPU) {
