@@ -26,8 +26,10 @@ var interval = setInterval(function() {
     seconds--;
     $('h1').text('Attendi ' + seconds + ' secondi...');
   } else {
+    // cancello intervallo dopo i 30 secondi e quini esco dal ciclo
     clearInterval(interval);
     $('h1').text('');
+    // scaduti i 30 secondi faccio partire il gico richiamando la funzione startGame()
     startGame(numbersCPU);
     $('h1').text('Fine del gioco!');
   }
