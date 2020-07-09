@@ -1,4 +1,4 @@
-// Un alert espone 10 numeri casuali (univoci).
+// Un alert espone 5 numeri casuali (univoci).
 // Poi parte un timer di 30 secondi.
 // Dopo 30 secondi l’utente deve inserire, un prompt alla volta, i numeri che ha visto precedentemente.
 // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati
@@ -19,18 +19,28 @@ for (var i = 0; i < numbersCPU.length; i++) {
 }
 
 // messaggio di attesa
-$('h1').addClass('active').html('Attendi 30 secondi...');
+var seconds = 30;
+$('h1').addClass('active').text('Attendi ' + seconds + ' secondi...');
+var interval = setInterval(function() {
+  if (seconds == 0) {
+    $('h1').text('');
+    clearInterval(interval);
+  } else {
+    seconds--;
+    $('h1').text('Attendi ' + seconds + ' secondi...');
+  }
+}, 1000);
 
 // faccio partire il gioco dopo 30 secondi con messaggi di attesa
 setTimeout(function(){
 
   // tolgo messaggio di attesa
-  $('h1').removeClass('active');
+  $('h1').text('');
 
   startGame(numbersCPU);
 
   // messaggio fine gioco
-  $('h1').addClass('active').html('Fine del gioco!');
+  $('h1').text('Fine del gioco!');
 
 }, 30000);
 
@@ -73,6 +83,8 @@ function printResult(numbersFound) {
   console.log(numbersGuessed);
   if (numbersGuessed == elements) {
     alert("Hai vinto! Hai indovinato tutti i numeri: " + numbersFound);
+  } else if (numbersGuessed == 0) {
+    alert("Non hai indovinato nessun numero. Hai la menoria di un pesciolino!")
   } else {
     alert("Hai indovinato " + numbersGuessed + " numeri: " + numbersFound);
   }
