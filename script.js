@@ -1,4 +1,4 @@
-// Un alert espone 5 numeri casuali (univoci).
+// Un alert espone 10 numeri casuali (univoci).
 // Poi parte un timer di 30 secondi.
 // Dopo 30 secondi l’utente deve inserire, un prompt alla volta, i numeri che ha visto precedentemente.
 // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati
@@ -7,10 +7,10 @@
 var numbersCPU = [];
 var min = 1;
 var max = 100;
+// variabile superglobale elements
+elements = 5;
 
-for (var i = 0; i < 5; i++) {
-  numbersCPU[i] = getRandom(min, max);
-}
+numbersCPU = randomArray(elements, min, max);
 console.log(numbersCPU);
 
 // espongo i 5 numeri generati tramite un alert
@@ -69,10 +69,28 @@ function printResult(numbersFound) {
   // stampo a video i numeri indovinati
   var numbersGuessed = numbersFound.length;
   console.log(numbersGuessed);
-  alert("Hai indovinato " + numbersGuessed + " numeri: " + numbersFound);
+  if (numbersGuessed == elements) {
+    alert("Hai vinto! Hai indovinato tutti i numeri: " + numbersFound);
+  } else {
+    alert("Hai indovinato " + numbersGuessed + " numeri: " + numbersFound);
+  }
 }
 
 // --------------------------- FUNCTIONS Utility --------------------------- //
+// funzione che restituisce un array di numeri casuali, non ripetuti, dando come parametri valore min, valore max e numero elementi. Se i parametri non sono corretti restituisce false
+function randomArray(elements, min, max) {
+  var array = [];
+  var random;
+  while (array.length < elements) {
+    random = getRandom(min, max);
+    // controllo che i numeri generati non siano duplicati
+    if (!inArray(array,random)) {
+      array.push(random);
+    }
+  }
+  return array;
+}
+
 function inArray (array, elemento) {
   var i = 0;
   var trovato = false;
