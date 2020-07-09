@@ -7,7 +7,7 @@
 var numbersCPU = [];
 var min = 1;
 var max = 100;
-// variabile superglobale elements visibile anche all'interno delle funzioni
+// variabile superglobale "elements" visibile anche all'interno delle funzioni
 elements = 5;
 
 numbersCPU = randomArray(elements, min, max);
@@ -21,7 +21,7 @@ for (var i = 0; i < numbersCPU.length; i++) {
 // messaggio di attesa
 $('h1').addClass('active').html('Attendi 30 secondi...');
 
-// faccio partire il gioco dopo di 30 secondi
+// faccio partire il gioco dopo 30 secondi con messaggi di attesa
 setTimeout(function(){
 
   // tolgo messaggio di attesa
