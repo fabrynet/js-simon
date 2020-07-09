@@ -18,31 +18,33 @@ for (var i = 0; i < numbersCPU.length; i++) {
   alert("Memorizza il " + (i+1) +" numero: " + numbersCPU[i]);
 }
 
-// messaggio di attesa
+// faccio partire il gioco dopo 30 secondi con messaggi di attesa
 var seconds = 30;
 $('h1').addClass('active').text('Attendi ' + seconds + ' secondi...');
 var interval = setInterval(function() {
-  if (seconds == 0) {
-    $('h1').text('');
-    clearInterval(interval);
-  } else {
+  if (seconds > 1) {
     seconds--;
     $('h1').text('Attendi ' + seconds + ' secondi...');
+  } else {
+    clearInterval(interval);
+    $('h1').text('');
+    startGame(numbersCPU);
+    $('h1').text('Fine del gioco!');
   }
 }, 1000);
 
 // faccio partire il gioco dopo 30 secondi con messaggi di attesa
-setTimeout(function(){
-
-  // tolgo messaggio di attesa
-  $('h1').text('');
-
-  startGame(numbersCPU);
-
-  // messaggio fine gioco
-  $('h1').text('Fine del gioco!');
-
-}, 30000);
+// setTimeout(function(){
+//
+//   // tolgo messaggio di attesa
+//   $('h1').text('');
+//
+//   startGame(numbersCPU);
+//
+//   // messaggio fine gioco
+//   $('h1').text('Fine del gioco!');
+//
+// }, 30000);
 
 // --------------------------- FUNCTIONS procedurali --------------------------- //
 function startGame(numbersCPU) {
