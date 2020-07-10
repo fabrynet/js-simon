@@ -18,22 +18,8 @@ for (var i = 0; i < numbersCPU.length; i++) {
   alert("Memorizza il " + (i+1) +" numero: " + numbersCPU[i]);
 }
 
-// faccio partire il gioco dopo 30 secondi con messaggi di attesa
 var seconds = 30;
-$('h1').addClass('active').text('Attendi ' + seconds + ' secondi...');
-var interval = setInterval(function() {
-  if (seconds > 1) {
-    seconds--;
-    $('h1').text('Attendi ' + seconds + ' secondi...');
-  } else {
-    // cancello intervallo dopo i 30 secondi e quini esco dal ciclo
-    clearInterval(interval);
-    $('h1').text('');
-    // scaduti i 30 secondi faccio partire il gico richiamando la funzione startGame()
-    startGame(numbersCPU);
-    $('h1').text('Fine del gioco!');
-  }
-}, 1000);
+var timer = setInterval(startGame, 1000);
 
 // faccio partire il gioco dopo 30 secondi con messaggi di attesa
 // setTimeout(function(){
@@ -49,7 +35,21 @@ var interval = setInterval(function() {
 // }, 30000);
 
 // --------------------------- FUNCTIONS procedurali --------------------------- //
-function startGame(numbersCPU) {
+function startGame(){
+  if (seconds > 0) {
+    $('h1').text('Attendi ' + seconds + ' secondi...');
+    seconds--;
+  } else {
+    // cancello intervallo dopo i 30 secondi e quini esco dal ciclo
+    clearInterval(timer);
+    $('h1').text('');
+    // scaduti i 30 secondi faccio partire il gioco richiamando la funzione startGame()
+    askNumbers(numbersCPU);
+    $('h1').text('Fine del gioco!');
+  }
+}
+
+function askNumbers(numbersCPU) {
   // tramite 5 prompt faccio inserire i 5 numeri visualizzati
   var numbersUser = [];
   var num;
@@ -88,7 +88,7 @@ function printResult(numbersFound) {
   if (numbersGuessed == elements) {
     alert("Hai vinto! Hai indovinato tutti i numeri: " + numbersFound);
   } else if (numbersGuessed == 0) {
-    alert("Non hai indovinato nessun numero. Hai la menoria di un pesciolino!")
+    alert("Non hai indovinato nessun numero. Hai la menoria di un pesciolino rosso!")
   } else {
     alert("Hai indovinato " + numbersGuessed + " numeri: " + numbersFound);
   }
